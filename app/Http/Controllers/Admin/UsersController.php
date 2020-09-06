@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
 use Gate;
 use Carbon\Carbon;
@@ -100,7 +101,7 @@ class UsersController extends Controller
         $user->email = $request->email;
         $user->updated_at = Carbon::now();
         $user->save();
-        return redirect('/admin/users');
+        return redirect('/admin/users')->with(Session::flash('success','user has been updated'));
     }
 
     /**
@@ -113,6 +114,6 @@ class UsersController extends Controller
     {
         $user->roles()->detach();
         $user->delete();
-        return redirect('admin/users');
+        return redirect('admin/users')->with(Session::flash('success','data has been deleted'));
     }
 }

@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Moderate;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Role;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
-class HomeController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +20,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-
-        $users = User::orderBy('created_at','desc')->paginate(5);
+        $users = User::orderBy('created_at','desc')->paginate(10);
         $roles = Role::all();
-        return view('Moderate.index');
+        return view('Moderate.Users.index')->with([
+            'users' => $users,
+            'roles' => $roles
+        ]);
     }
 
     /**
@@ -62,7 +68,12 @@ class HomeController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $roles = Role::where('name','!=','admin')->get();
+    
+        return view('Moderate.Users.edit')->with([
+            'user' => $user,
+            'roles' => $roles
+        ]);        
     }
 
     /**
@@ -74,7 +85,30 @@ class HomeController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+
+        $his_pass = User::where('id',Auth::user()->id)->first();
+        if(Hash::check($request->pass_conf,$his_pass->password)):
+            
+            if(isset($request->new_pass)):
+                $user->password = Hash::make($request->new_pass);
+            endif;
+            
+            $user->roles()->sync($request->roles);
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->updated_at = Carbon::now();
+            $user->save();
+            $status = 'success';
+            $msg = 'Success user has been updated';
+        else:
+
+            
+            $status = 'error';
+            $msg = 'Error could not update user please check your confirm password';
+        endif;
+
+        return redirect()->route('moderate.users.index')->with(Session::flash($status,$msg));
+
     }
 
     /**
@@ -85,6 +119,8 @@ class HomeController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->roles()->detach();
+        $user->destroy();
+        return redirect()->route('moderate.users.index')->with(Session::flash('success','item has been deleted!'));
     }
 }

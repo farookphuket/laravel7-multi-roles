@@ -23,6 +23,10 @@
 </head>
 <body>
     @include('layouts.admin_menu')
+    <div class="pt-4">
+        @include('INC.flash_message')
+    </div>
+    
     <div class="container">
         <div id="app">
         </div>
