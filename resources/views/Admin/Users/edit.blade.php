@@ -22,6 +22,19 @@
                 </label>
                 <input type="email" name="email" class="form-control" value="{{$user->email}}"> 
             </div>
+            @if($user->id == Auth::user()->id)
+
+                <div class="forom-group pt-4">
+                    <label class="alert alert-warning pt-4">
+                        Change Password?
+                    </label>
+                    <input type="text" name="new_pass" class="form-control" placeholder="change your password here"> 
+                    <p class="alert alert-danger pt-2 mb-4" style="font-weight:bold;font-size:18px;">
+if you do not want to change your password just leave the above field blank.
+                    </p>
+                    
+                </div>
+            @endif
 
             <div class="form-group pt-4">
                 @foreach($roles as $role)

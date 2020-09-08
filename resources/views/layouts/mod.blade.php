@@ -24,10 +24,11 @@
 <body>
 
     @include('layouts.mod_menu')
+
+    <div class="pt-5 mb-4">
+        @include('INC.flash_message')
+    </div>
     <div class="container">
-        <div class="pt-5 mb-4">
-            @include('INC.flash_message')
-        </div>
         
         <div id="app"></div>
         

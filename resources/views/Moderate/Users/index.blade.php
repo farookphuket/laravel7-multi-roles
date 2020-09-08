@@ -4,6 +4,16 @@
 @section('content')
 <div class="row">
     <div class="col-lg-12">
+        <h1 class="text-center">
+            Moderate page 
+        </h1>
+        <p>
+This page can only access by "Moderate" user only! by the power of Moderate you can "edit,delete member" from the database but you cannot delete yourself.
+        </p>
+        
+    </div>
+    
+    <div class="col-lg-12">
         
         <div class="table-responsive">
             <table class="table table-striped">

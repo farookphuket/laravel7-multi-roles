@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Gate;
 use Carbon\Carbon;
 use App\User;
@@ -96,12 +98,25 @@ class UsersController extends Controller
     {
 
         $user->roles()->sync($request->roles);
+    
 
+        if(isset($request->new_pass)):
+          $user->password = Hash::make($request->new_pass);
+        endif;
         $user->name = $request->name;
         $user->email = $request->email;
         $user->updated_at = Carbon::now();
+
+        if($user->id == Auth::user()->id):
+            $msg = 'your profile has been updated';
+        else:
+            $msg = "the user {$request->name} has updated!";
+        endif;
+
         $user->save();
-        return redirect('/admin/users')->with(Session::flash('success','user has been updated'));
+        
+
+        return redirect('/admin/users')->with(Session::flash('success',$msg));
     }
 
     /**

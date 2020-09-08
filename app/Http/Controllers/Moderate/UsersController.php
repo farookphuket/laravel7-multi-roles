@@ -92,14 +92,18 @@ class UsersController extends Controller
             if(isset($request->new_pass)):
                 $user->password = Hash::make($request->new_pass);
             endif;
-            
+        if($user->id == Auth::user()->id):
+            $msg = "your profile has been updated!";
+        else:
+
+            $msg = "The user '{$request->name}' has been updated!";
+       endif; 
             $user->roles()->sync($request->roles);
             $user->name = $request->name;
             $user->email = $request->email;
             $user->updated_at = Carbon::now();
             $user->save();
             $status = 'success';
-            $msg = 'Success user has been updated';
         else:
 
             
