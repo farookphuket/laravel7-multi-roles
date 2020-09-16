@@ -6,6 +6,10 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+
+use App\Role;
+
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -58,5 +62,11 @@ class User extends Authenticatable
             return true;
         endif;
         return false;
+    }
+
+
+
+    public function pages(){
+        return $this->hasMany('App\Page');
     }
 }

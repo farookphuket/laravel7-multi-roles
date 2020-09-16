@@ -151,6 +151,71 @@
                     or to create your own account by click "register" link.
                    </p>
                 </div>
+
+                <div class="col-lg-12">
+                    <h1 class="pt-4 text-center">how to connect to sqlite in manjaro</h1>
+                   <p>
+                    Date 16 Sep 2020 is the day that I found a very hard time for me to setup sqlite to work I did search a couple hours on the internet but it is doesn't seem to be solve my problem onto connect my app to sqlite even know that I can completely connect with mysql very well but NOT sqlite why? the solution for this in my case is way more easy than what I ever thinking of! just a few more things to do then I'll get what I need and the below here is how do I fix my problem.
+                   </p>
+                   
+                   <ol class="list-group">
+                       <li class="list-group-item">
+                        <h3 class="text-center">if this is your first time ever config sqlite</h3>
+                       <p class="pt-2">
+                        run command "sudo pacman -Sy " to update your system.
+                       </p>
+                      <p class="pt-2">
+                        then run "sudo pacman -S php-sqlite" to install sqlite onto your system if you never set it up before make sure you have run "sudo systemctl restart httpd" afterward.
+                      </p>
+                      
+                       </li>
+                       <li class="list-group-item">
+                        <h3 class="text-center">
+                            make sure that you have enable extension pdo_sqlite sqlite3 
+                        </h3>
+                       <p class="pt-2">
+                        open your php.ini file we have to edit it in order to make it work "sudo vim /etc/php/php.ini" should look something like this.
+
+                       </p>
+                       <img src="https://i.ibb.co/3zqb8zD/php-ini.png" class="responsive">
+                       
+
+                       </li>
+                       <li class="list-group-item">
+                            <h3 class="text-center">
+                            give the absolute path to your database sqlite
+                            </h3>
+                           <p>
+                            I did create folder "DB" and create "database.sqlite" into it so my .env file will look like this
+                           </p>
+                           <img src="https://i.ibb.co/dtgT8zN/env-file.png" class="responsive"> 
+                           <ul class="pt-4">
+                                <li>
+                                DB_DATABASE=/srv/http/my-project-folder/DB/database.sqlite
+                                </li>
+                                
+                           </ul>
+                           
+                       </li>
+                       <li class="list-group-item">
+                        <h3 class="text-center">You're DONE!</h3>
+                        
+                       </li>
+                   </ol>
+
+
+                </div>
+
+                <div class="col-lg-12 pt-4 mb-4">
+                    <h1 class="pt-4 text-center">how to connect to sqlite in Ubuntu</h1>
+                    
+
+                    <p class="mb-4">
+                    STATUS : WAITING for Ubuntu file...
+                    </p>
+                    
+                </div>
+                
                <div class="col-lg-12 pt-6">
                     <h1 class="text-center pt-6">ถุย! ชีวิต...</h1>
                     

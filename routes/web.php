@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','PagesController@index')->name('pages');
+Route::get('/blog','PagesController@blog')->name('blog');
+Route::get('/about','PagesController@about')->name('about');
+Route::get('/contact','PagesController@contact')->name('contact');
 
 
 Route::get('/logout','\App\Http\Controllers\Auth\LoginController@logout');
@@ -31,6 +32,10 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:admi
     Route::resource('/users','UsersController');
     Route::resource('/users/{id}/edit','UsersController@edit');
     Route::post('/users/{id}/update','UsersController@update');
+
+
+    Route::resource('/pages','PagesController');
+    Route::post('/pages/store','PagesController@store');
 });
 
 Route::namespace('Moderate')->prefix('moderate')->name('moderate.')->middleware('can:mod-user')->group(function(){
