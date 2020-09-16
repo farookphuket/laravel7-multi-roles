@@ -45,7 +45,7 @@
 
 
 
-[env_file][https://i.ibb.co/dtgT8zN/env-file.png]
+[env_file]:https://i.ibb.co/dtgT8zN/env-file.png
 ![env file][env_file]
 
 
@@ -56,7 +56,7 @@
 
 
 
-[php_ini][https://i.ibb.co/3zqb8zD/php-ini.png]
+[php_ini]:https://i.ibb.co/3zqb8zD/php-ini.png
 ![php ini][php_ini]
 
 
